@@ -1,0 +1,8 @@
+2025:05:22-13:36:47:(1847551) |CCL_WARN| value of CCL_ALLREDUCE changed to be direct:0-max (default:)
+2025:05:22-13:36:47:(1847551) |CCL_WARN| MPI was initialized externally, CCL-MPI specific environment is ignored
+2025:05:22-13:36:47:(965691) |CCL_WARN| MPI was initialized externally, CCL-MPI specific environment is ignored
+2025:05:22-13:36:47:(1847551) |CCL_WARN| MPI was initialized externaly but with unexpected thread level: required 3, provided 0
+2025:05:22-13:36:47:(965691) |CCL_WARN| MPI was initialized externaly but with unexpected thread level: required 3, provided 0
+✅ result matches reference
+Wrote results/tmp_mpi_direct_N128_S1.csv
+2025:05:22-13:36:48:(1847551) |CCL_WARN| MPI_Finalize has been called before CCL finalization
