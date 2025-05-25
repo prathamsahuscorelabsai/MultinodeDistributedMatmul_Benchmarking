@@ -60,7 +60,8 @@ Change the binary on line 35 depending on using with cblas or with normal mamtul
 #### Can we replace the oneCCL vanilla raw matmul with sgemm?
 ```
 mpiicpc -std=c++17 matmul_ccl.cpp \
-    -lccl -lmkl_intel_lp64 -lmkl_core -lmkl_sequential -lpthread -o matmul_ccl```
+    -lccl -lmkl_intel_lp64 -lmkl_core -lmkl_sequential -lpthread -o matmul_ccl
+```
 
 Use the same scripts/sweep_ccl.sh to run the code. We are still facing some inefficiencies in matmul as we are using CBLAS sgemm and not MKL DNN Sgemm where .
 
