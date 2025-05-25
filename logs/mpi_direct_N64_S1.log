@@ -1,8 +1,14 @@
-2025:05:22-13:36:46:(965674) |CCL_WARN| MPI was initialized externally, CCL-MPI specific environment is ignored
-2025:05:22-13:36:46:(1847521) |CCL_WARN| value of CCL_ALLREDUCE changed to be direct:0-max (default:)
-2025:05:22-13:36:46:(1847521) |CCL_WARN| MPI was initialized externally, CCL-MPI specific environment is ignored
-2025:05:22-13:36:46:(1847521) |CCL_WARN| MPI was initialized externaly but with unexpected thread level: required 3, provided 0
-2025:05:22-13:36:46:(965674) |CCL_WARN| MPI was initialized externaly but with unexpected thread level: required 3, provided 0
-✅ result matches reference
-Wrote results/tmp_mpi_direct_N64_S1.csv
-2025:05:22-13:36:46:(1847521) |CCL_WARN| MPI_Finalize has been called before CCL finalization
+/home/pratham/anaconda3/envs/all_reduce/bin/deepspeed:4: DeprecationWarning: pkg_resources is deprecated as an API. See https://setuptools.pypa.io/en/latest/pkg_resources.html
+  __import__('pkg_resources').require('deepspeed==0.16.6+027ee21a')
+[2025-05-23 11:03:56,688] [WARNING] [real_accelerator.py:194:get_accelerator] Setting accelerator to CPU. If you have GPU or other accelerator, we were unable to detect it.
+/home/pratham/anaconda3/envs/all_reduce/lib/python3.10/site-packages/oneccl_bindings_for_pytorch/__init__.py:25: UserWarning: Warning: Cannot load xpu CCL. CCL doesn't work for XPU device due to /home/pratham/anaconda3/envs/all_reduce/lib/python3.10/site-packages/oneccl_bindings_for_pytorch/lib/liboneccl_bindings_for_pytorch_xpu.so: cannot open shared object file: No such file or directory
+  warnings.warn(f"Warning: Cannot load xpu CCL. CCL doesn't work for XPU device due to {e}")
+[2025-05-23 11:03:56,698] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cpu (auto detect)
+[2025-05-23 11:03:56,768] [WARNING] [real_accelerator.py:194:get_accelerator] Setting accelerator to CPU. If you have GPU or other accelerator, we were unable to detect it.
+[2025-05-23 11:03:56,768] [INFO] [real_accelerator.py:239:get_accelerator] Setting ds_accelerator to cpu (auto detect)
+['mpirun', '-ppn', '1', '-genv', 'PYTHONPATH', '/home/pratham/final_benchmarking', '-genv', 'OMP_NUM_THREADS', '56', '-genv', 'MASTER_ADDR', '10.250.11.10', '-genv', 'MASTER_PORT', '29501', '-genv', 'WORLD_SIZE', '2', '-genv', 'LOCAL_SIZE', '1', '-genv', 'I_MPI_PIN', '0', '-hosts', '10.250.11.10,10.250.11.11', '-n', '1', '-env', 'RANK', '0', '-env', 'LOCAL_RANK', '0', 'numactl', '-m', '0', '-C', '0-55', '/home/pratham/anaconda3/envs/all_reduce/bin/python', '-u', 'code/deepspeed_matmul.py', '--size', '64', '--dtype', 'fp32', '--count', '20', '--warmup', '5', '--backend', 'ccl', '--ccl', '--outfile', '/home/pratham/final_benchmarking/results/tmp_mpi_direct_N64_S1.csv', ':', '-n', '1', '-env', 'RANK', '1', '-env', 'LOCAL_RANK', '0', 'numactl', '-m', '0', '-C', '0-55', '/home/pratham/anaconda3/envs/all_reduce/bin/python', '-u', 'code/deepspeed_matmul.py', '--size', '64', '--dtype', 'fp32', '--count', '20', '--warmup', '5', '--backend', 'ccl', '--ccl', '--outfile', '/home/pratham/final_benchmarking/results/tmp_mpi_direct_N64_S1.csv']
+[2025-05-23 11:03:58,543] [INFO] [runner.py:605:main] cmd = mpirun -ppn 1 -genv PYTHONPATH /home/pratham/final_benchmarking -genv OMP_NUM_THREADS 56 -genv MASTER_ADDR 10.250.11.10 -genv MASTER_PORT 29501 -genv WORLD_SIZE 2 -genv LOCAL_SIZE 1 -genv I_MPI_PIN 0 -hosts 10.250.11.10,10.250.11.11 -n 1 -env RANK 0 -env LOCAL_RANK 0 numactl -m 0 -C 0-55 /home/pratham/anaconda3/envs/all_reduce/bin/python -u code/deepspeed_matmul.py --size 64 --dtype fp32 --count 20 --warmup 5 --backend ccl --ccl --outfile /home/pratham/final_benchmarking/results/tmp_mpi_direct_N64_S1.csv : -n 1 -env RANK 1 -env LOCAL_RANK 0 numactl -m 0 -C 0-55 /home/pratham/anaconda3/envs/all_reduce/bin/python -u code/deepspeed_matmul.py --size 64 --dtype fp32 --count 20 --warmup 5 --backend ccl --ccl --outfile /home/pratham/final_benchmarking/results/tmp_mpi_direct_N64_S1.csv
+  File "/home/pratham/final_benchmarking/code/deepspeed_matmul.py", line 58
+    device = torch.device("cpu")a
+                                ^
+SyntaxError: invalid syntax

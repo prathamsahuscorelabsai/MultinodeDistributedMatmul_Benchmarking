@@ -55,7 +55,7 @@ def main():
     rank, world = dist.get_rank(), dist.get_world_size()
     hostname, ip = socket.gethostname(), get_ip_address()
 
-    device = torch.device("cpu")a
+    device = torch.device("cpu")
     N = args.size
 
     # create / broadcast matrices
