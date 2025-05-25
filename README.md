@@ -5,7 +5,7 @@ For installation of the libraries and benchmarks, please view the following:
 ```
 ./scripts/build.sh
 ```
-
+You will now be able to see the binaries in the `bin` directory.
 
 ## Running the first principles mpi code.
 To run the first principles code
@@ -50,16 +50,25 @@ We aim to run the oneCCL code for distributed matmul with multiple algorithms on
 
 Feel free to tweak the naming or add more environment variables (e.g. CCL_RS_CHUNK_COUNT, CCL_RS_MIN_CHUNK_SIZE) in the same pattern.
 
+To run the oneCCL code:
+
+```
+./scripts/sweep_ccl.sh
+```
+
+Change the binary on line 35 depending on using with cblas or with normal mamtul(very inefficient).
 #### Can we replace the oneCCL vanilla raw matmul with sgemm?
+```
 mpiicpc -std=c++17 matmul_ccl.cpp \
-    -lccl -lmkl_intel_lp64 -lmkl_core -lmkl_sequential -lpthread -o matmul_ccl
+    -lccl -lmkl_intel_lp64 -lmkl_core -lmkl_sequential -lpthread -o matmul_ccl```
 
 Use the same scripts/sweep_ccl.sh to run the code. We are still facing some inefficiencies in matmul as we are using CBLAS sgemm and not MKL DNN Sgemm where .
 
 
 ## Some generic patterns:
 - The net time taken to initialise deepspeed etc, takes much longer than that of oneCCL.(cold overhead is too high, even though CCL has KVS setup, etc.)
-- however matmul used by deepspeed is very optimised, leading to much lesser time net for bigger size matrices. We can figure out how to solve this for ccl
+- however matmul used by deepspeed is very optimised.
+- AllReduce collective is much faster with using vanillaoneCCL.
 
 
 
