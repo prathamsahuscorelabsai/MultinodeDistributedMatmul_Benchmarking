@@ -1,8 +1,10 @@
 For installation of the libraries and benchmarks, please view the following:
-
+First clone the directory in the same location in all the nodes.
 
 ## To make the binaries
 ```
+source  /opt/intel/oneapi/dnnl/latest/env/vars.sh 
+source $HOME/bkm_method/oneCCL/build/_install/env/setvars.sh 
 ./scripts/build.sh
 ```
 You will now be able to see the binaries in the `bin` directory.
@@ -11,11 +13,18 @@ You will now be able to see the binaries in the `bin` directory.
 To run the first principles code
 
 ```
+source $HOME/bkm_method/oneCCL/build/_install/env/setvars.sh  # for intel MPI
+source /opt/intel/oneapi/mkl/latest/env/vars.sh intel64
 ./scripts/sweep_mpi.sh
 ```
 
 ## Running the deepspeed code
+To run we use:
 
+```
+./scripts/sweep_deepspeed_ccl.sh
+
+```
 With mpi and gloo:
 - First we switch of oneCCL, that is we uninstall it from the system. This is because the deepspeed code is such that it will default always to oneCCL implementation if it's environment variables exist.
     ```
@@ -56,15 +65,16 @@ To run the oneCCL code:
 ./scripts/sweep_ccl.sh
 ```
 
-Change the binary on line 35 depending on using with cblas or with normal mamtul(very inefficient).
+Change the binary on line 35 depending on using with cblas or oneDNN or with normal mamtul(very inefficient).
 #### Can we replace the oneCCL vanilla raw matmul with sgemm?
 ```
-mpiicpc -std=c++17 matmul_ccl.cpp \
+
+source /opt/intel/oneapi/dnnl/latest/env/vars.sh intel64
+mpicxx -std=c++17 matmul_ccl.cpp \
     -lccl -lmkl_intel_lp64 -lmkl_core -lmkl_sequential -lpthread -o matmul_ccl
 ```
 
 Use the same scripts/sweep_ccl.sh to run the code. We are still facing some inefficiencies in matmul as we are using CBLAS sgemm and not MKL DNN Sgemm where .
-
 
 ## Some generic patterns:
 - The net time taken to initialise deepspeed etc, takes much longer than that of oneCCL.(cold overhead is too high, even though CCL has KVS setup, etc.)

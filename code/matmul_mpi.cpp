@@ -1,6 +1,5 @@
 // matmul_mpi.cpp — Distributed matmul benchmark using MPI + MKL
-// Build: mpiicpc -std=c++17 matmul_mpi.cpp -lmkl_rt -o matmul_mpi
-
+// Build: mpicxx -std=c++17 code/matmul_mpi.cpp -lmkl_rt -o bin/matmul_mpi
 #include <mpi.h>
 #include <iostream>
 #include <vector>

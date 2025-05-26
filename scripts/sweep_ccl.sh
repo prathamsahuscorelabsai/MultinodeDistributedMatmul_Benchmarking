@@ -20,7 +20,8 @@ export CCL_KVS_IFACE=ens1f0np0     # your regular Ethernet link
 TRANSPORTS=(mpi)
 
 # allreduce algorithms to test (full range)
-ALGS=(direct rabenseifner nreduce ring double_tree recursive_doubling 2d)
+# ALGS=(direct rabenseifner nreduce ring double_tree recursive_doubling 2d)
+ALGS=(double_tree recursive_doubling 2d)
 # ALGS=(ring double_tree recursive_doubling 2d)
 
 # --- two‐node hostnames/IPs ------------------------------------
